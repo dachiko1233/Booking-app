@@ -14,9 +14,11 @@ func main() {
 	// slice and Array
 	var bookings []string
 
-	fmt.Printf("Welcome to %s booking application\n", conferenceName)
-	fmt.Printf("We have total of %d tickets and %d are still available\n", conferenceTickets, remainingTickets)
-	fmt.Println("Get your tickets here to attend")
+	greetUsers(conferenceName, conferenceTickets, remainingTickets)
+
+	//fmt.Printf("Welcome to %s booking application\n", conferenceName)
+	// fmt.Printf("We have total of %d tickets and %d are still available\n", conferenceTickets, remainingTickets)
+	// fmt.Println("Get your tickets here to attend")
 
 	for {
 		var firstName string
@@ -79,4 +81,12 @@ func main() {
 		}
 
 	}
+}
+
+func greetUsers(conName string, conTickets int, remTickets uint) {
+
+	fmt.Printf("Welcome to %s booking application\n", conName)
+	fmt.Printf("We have total of %d tickets and %d are still available\n", conTickets, remTickets)
+	fmt.Println("Get your tickets here to attend")
+
 }
