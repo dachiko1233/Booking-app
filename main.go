@@ -10,7 +10,7 @@ func main() {
 	var conferenceName = "Go Conference"
 	const conferenceTickets int = 50
 	var remainingTickets uint = 50
-	var tic int = 52
+
 	// slice and Array
 	var bookings []string
 
@@ -67,8 +67,15 @@ func main() {
 			}
 
 		} else {
-			fmt.Println("Your input data is invalid, try again")
-
+			if !isValidName {
+				fmt.Println("Firs name or last name you entered is to short")
+			}
+			if !isValidEmail {
+				fmt.Println("Email address you entered doesn't contain @ sign")
+			}
+			if !isValidTicketNumber {
+				fmt.Println("Number of tickets you entered is invalid")
+			}
 		}
 
 	}
