@@ -3,7 +3,7 @@ package main
 import (
 	"booking-app/helper"
 	"fmt"
-	"strings"
+	"strconv"
 )
 
 const conferenceTickets int = 50
@@ -11,8 +11,8 @@ const conferenceTickets int = 50
 var conferenceName = "Go Conference"
 var remainingTickets uint = 50
 
-// slice and Array
-var bookings []string
+// we make list of map there
+var bookings = make([]map[string]string, 0)
 
 func main() {
 
@@ -29,14 +29,8 @@ func main() {
 
 			bookingTickets(userTicket, firstName, lastName, email)
 
-			fmt.Printf("Thank you %s %s for booking %d tickets. You will receive a confirmation email at %s\n", firstName, lastName, userTicket, email)
-
-			fmt.Printf("%d tickets reamining for %s\n", remainingTickets, conferenceName)
-
 			// call func print Firsnames
-			firstName := getFirstNames()
-			fmt.Printf("The first names of bookings are %s\n", firstName)
-
+			getFirstNames()
 			if remainingTickets == 0 {
 				fmt.Println("Our conferance if booked out. Come back next year")
 				break
@@ -68,8 +62,7 @@ func getFirstNames() []string {
 	firstNames := []string{}
 
 	for _, booking := range bookings {
-		var names = strings.Fields(booking)
-		firstNames = append(firstNames, names[0])
+		firstNames = append(firstNames, booking["firstName"])
 	}
 	return firstNames
 }
@@ -99,7 +92,17 @@ func getUserInput() (string, string, string, uint) {
 func bookingTickets(userTicket uint, firstName, lastName, email string) {
 
 	remainingTickets = remainingTickets - userTicket
-	bookings = append(bookings, firstName+" "+lastName)
+
+	//create a map for user
+	var userData = make(map[string]string)
+	userData["firstName"] = firstName
+	userData["lastName"] = lastName
+	userData["email"] = email
+	userData["number of tickets"] = strconv.FormatUint(uint64(userTicket), 10)
+
+	bookings = append(bookings, userData)
+
+	fmt.Printf("List of bookings is %s\n", bookings)
 
 	fmt.Printf("Thank you %s %s for booking %d tickets. You will receive a confirmation email at %s\n", firstName, lastName, userTicket, email)
 
